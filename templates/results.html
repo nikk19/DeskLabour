@@ -1,0 +1,46 @@
+{% extends 'home.html' %}
+
+
+{% block content %}
+ 
+
+ {% for details in labour_detail %}
+ <div class="card">
+    <div class="card-header">
+    <h1>Results</h1>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">NAME OF LABOUR : {{details.user}}</h5>
+      <p class="card-text">
+     <ul>
+    <li><b>ADDRESS :</b> &nbsp;{{ details.location }}</li>
+    <li><b>GENDER :</b> &nbsp;{{ details.gender }}</li>
+    <li><b>ABOUT :</b> &nbsp;{{ details.about }}</li>
+    <li><b>WORKING FROM / EXPERIENCE :</b> &nbsp;{{ details.years_of_exp }} years</li>
+    <li>
+        <strong>Hired by : </strong>
+        {% for engineer in engg %}
+            {{engineer.name}}
+        {% endfor %}
+    </li>
+
+   
+  </form>
+      </p>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+  </div>
+    
+    
+
+    <!-- <li>{{ details. }}</li> -->
+
+    </ul>
+   
+
+{% endfor %}
+
+
+{% endblock content %}
+
+

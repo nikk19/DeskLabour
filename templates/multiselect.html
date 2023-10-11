@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Jquery Multiselect</title>
+</head>
+
+<body>
+    <div class='container'>
+
+        <form action="">
+            <input type="checkbox" name="checkbox_1" value="checkbox_1" class="checkbox">
+            <input type="checkbox" name="checkbox_1" value="checkbox_2" class="checkbox">
+            <input type="checkbox" name="checkbox_1" value="checkbox_3" class="checkbox">
+            <input type="checkbox" name="checkbox_1" value="checkbox_4" class="checkbox">
+            <button type="button" id="submit-button">Send data to server</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            var selected_items = [];
+            $(".checkbox").click(function () {
+                var selected_item = $(this).val();
+                var index = selected_items.indexOf(selected_item);
+                if (index == -1) {
+                    selected_items.push(selected_item);
+                }
+                else {
+                    selected_items.splice(index, 1);
+                }
+            });
+            $("#submit-button").click(function () {
+                $.ajax({
+                    url: '/path/to/',
+                    data: { 'checkboxes': selected_items.join(","), 'csrfmiddlewaretoken': {{ csrfmiddlewaretoken }} },
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+            }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

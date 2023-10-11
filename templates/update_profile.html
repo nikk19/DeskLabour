@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+{% if request.user.is_authenticated %}
+{%if labr_id and labr_uid %}
+<form class="form-control text-center" action="{% url 'edit_prof' %}" method="post">
+    {% csrf_token %}
+    <h3 class='text-center'>USER DETAILS</h3>
+
+
+    {{ u_form|crispy }}
+
+    {{p_form|crispy}}
+
+    <input type="submit" value="Submit">
+</form>
+
+{% else %}
+
+
+<form class="form-control text-center" action='/edit_prof_eng' method="post">
+    {% csrf_token %}
+    {{ue_form|crispy}}
+
+    {{e_form|crispy}}
+    <input type="submit" value="Submit">
+</form>
+
+
+
+
+{% endif %}
+
+{% endif %}
+{% endblock %}

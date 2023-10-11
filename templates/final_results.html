@@ -1,0 +1,34 @@
+{% extends 'index.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet"  href="{% static 'css/new.css' %}">
+
+{% endblock css %}
+
+<!-- <link rel="stylesheet" href="{% static 'static/new.css' %}"> -->
+
+
+
+
+{% block content %}
+<div class="container">
+    <form action="{% url 'findlabr' %}" class='form-inline' method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-4">
+                {{ form.Category|as_crispy_field }}
+            </div>
+            <div class="form-group col-4">
+                {{ form.City|as_crispy_field }}
+            </div>
+            <div class="form-group col-4">
+                <input class="btn btn-primary" type="submit" value="Search">
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+
+{% endblock content %}

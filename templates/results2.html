@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% load static %}
+<script src='{ % url "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" %}'></script>
+{% block content %}
+
+
+<style>
+  input{
+    padding: 5px 10px;
+
+  }
+</style>
+<div class="card">
+  <div class="card-header">
+  <h1>Results</h1>
+  </div>
+  <!-- <form>
+    {% csrf_token %}
+    {% for i in data %}
+    <div class="card-body">
+      <h5 class="card-title">NAME OF LABOUR : {{i.user.full_name}}</h5>
+      <p class="card-text">
+        <ul>
+          <li><b>ID</b>&nbsp;{{ i.user.id }}</li>
+          <li><b>NAME</b>&nbsp;{{ i.user.full_name }}</li>
+          <li><b>MOBILE</b>&nbsp;{{ i.user.phone_no }}</li>
+          <li><b>YEARS OF EXP</b>&nbsp;{{i.years_of_exp }}</li>
+          <li><b>GENDER</b>&nbsp;{{ i.gender }}</li>
+          <input type="checkbox" 'name ='{{ i.user.id }}'>
+        </ul>
+        {% endfor %}
+        <input type='text' name ='list_of_id'>
+        <button type="submit">SUBMIT</button>
+      </form> -->
+ 
+        {% for i in data %}
+        <ul>
+          {{request.user}}
+          <li><b>ID</b>&nbsp;{{ i.user.id }}</li>
+          <li><b>NAME</b>&nbsp;{{ i.user.full_name }}</li>
+          <li><b>MOBILE</b>&nbsp;{{ i.user.phone_no }}</li>
+          <li><b>YEARS OF EXP</b>&nbsp;{{i.years_of_exp }}</li>
+          <li><b>GENDER</b>&nbsp;{{ i.gender }}</li>
+          <!-- <input type="checkbox" name='name ='{{ i.user.id }}'> --> 
+        </ul>
+        {% endfor %}
+        {% if data %}
+        <form action="{% url 'hire' category city %}" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="Submit">
+      </form>
+      {% else %}
+      <h1>No results Found!!</h1>
+        {%endif %}
+        
+        
+  
+{% endblock content %}

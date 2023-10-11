@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Kendo UI Snippet</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.2.511/styles/kendo.default-v2.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.2.511/js/kendo.all.min.js"></script>
+</head>
+<body>
+  
+    <div id="example" role="application">
+        <div class="demo-section k-header">
+            <h2>Select labour to hire</h2>
+            <form action="{% url 'hire' %}" method="POST">
+                {% csrf_token %}
+                {% for i in data %}
+          <ul>
+
+          
+          <li><b>NAME</b>&nbsp;{{ i.user.full_name }}</li>
+          <li><b>MOBILE</b>&nbsp;{{ i.user.phone_no }}</li>
+          <li><b>YEARS OF EXP</b>&nbsp;{{i.years_of_exp }}</li>
+          <li><b>GENDER</b>&nbsp;{{ i.gender }}</li>
+        </ul>
+        <br>
+                {% endfor %}
+            <label for="required">Required</label>
+            <select name ="labr"id="required" multiple="multiple" data-placeholder="Select attendees...">
+                {% for i in data %}
+                <option value="{{i.id}}">{{i.user.full_name}}</option>
+                {% endfor %}
+            </select>
+           <input type="submit" value="submit">
+        </form>
+        </div>
+        <style>
+            .k-list .k-item {
+                position: relative;
+            }  
+
+          .k-item input {
+            position: absolute;
+            right: 0
+          }
+        </style>
+        <script>
+            $(document).ready(function() {
+                var checkInputs = function(elements) {
+                  elements.each(function() {
+                        var element = $(this);     
+                    var input = element.children("input");
+
+                    input.prop("checked", element.hasClass("k-state-selected"));
+                  });
+                };
+                // create MultiSelect from select HTML element
+                var required = $("#required").kendoMultiSelect({
+                  itemTemplate: "#:data.text# <input type='checkbox'/>",
+                  autoClose: false,
+                  dataBound: function() {
+                    var items = this.ul.find("li");
+                    setTimeout(function() {
+                      checkInputs(items);
+                    });
+                  },
+                  change: function() {
+                    var items = this.ul.find("li");
+                    checkInputs(items);
+                  }
+                }).data("kendoMultiSelect");
+            });
+        </script>
+    </div>
+</body>
+</html>

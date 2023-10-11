@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+<!-- {% load crispy_forms_tags %} -->
+{% block content %}
+
+<div class="container text-center">
+ 
+    <form action= "{% url 'findlabr' %}" method='post'>
+      {% csrf_token %}
+      <div class="form-group">
+        {{form.Category}}
+      </div>
+      <div class="form-group">
+        {{form.City}}
+      </div>
+      <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Search">
+    </div>
+      
+    </form>
+    <!-- <ul>
+      {% for labours in filter.qs %}
+        <li>{{ labours.user }} - {{ labours.user.phone_no}}</li>
+      {% endfor %}
+      </ul> -->
+
+
+</div>
+
+ {% endblock content %}
